@@ -2,6 +2,7 @@ const { notStrictEqual } = require("assert");
 const { default: chalk } = require("chalk");
 const fs = require("fs");
 
+//Function to fetch notes
 const getNotes = () => {
   console.log(chalk.green.bold("Your notes...\n"));
   const notes = loadNotes();
@@ -11,6 +12,7 @@ const getNotes = () => {
   });
 };
 
+//Function to add a new note
 const addNote = (title, body) => {
   const notes = loadNotes();
   const duplicatedNote = notes.find((note) => note.title === title);
@@ -28,6 +30,7 @@ const addNote = (title, body) => {
   }
 };
 
+//Function to remove a note
 const removeNote = (title) => {
   const notes = loadNotes();
   const noDuplicatedNotes = notes.filter((note) => !(note.title === title));
@@ -39,6 +42,7 @@ const removeNote = (title) => {
   }
 };
 
+//Funtion to console log a note
 const readNote = (title) => {
   const notes = loadNotes();
   const foundNote = notes.find((note) => note.title == title);
@@ -50,11 +54,13 @@ const readNote = (title) => {
   }
 };
 
+// Function to save edited notes
 const saveNotes = (notes) => {
   const dataJSON = JSON.stringify(notes);
   fs.writeFileSync("notes.json", dataJSON);
 };
 
+// Function to load notes into the memory
 const loadNotes = () => {
   try {
     const dataBuffer = fs.readFileSync("notes.json");
